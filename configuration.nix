@@ -18,14 +18,8 @@
     htop
     curl
     jq
+    ollama
   ];
-
-  services.ollama = {
-    enable = true;
-    # Optional: preload models, see https://ollama.com/library
-    loadModels = ["gpt-oss:20b"];
-    package = pkgs.ollama-cuda;
-  };
 
   # ── Tailscale ───────────────────────────────────────────────────────
   services.tailscale = {
@@ -61,7 +55,7 @@
   };
 
   # ── User ────────────────────────────────────────────────────────────
-  users.users.hachem = {
+  users.users.ollama = {
     isNormalUser = true;
     extraGroups = ["wheel"];
     shell = pkgs.zsh;

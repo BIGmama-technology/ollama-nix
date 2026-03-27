@@ -18,8 +18,29 @@
     htop
     curl
     jq
-    ollama
+    ollama-cuda
   ];
+
+  # ── Ollama (custom systemd service) ──────────────────────────────
+  # Binds exclusively to the Tailscale interface for private access.
+  systemd.services.ollama = {
+    enable = true;
+    description = "Ollama serving nemotron-cascade-2 on Tailscale interface";
+    after = ["network.target" "tailscaled.service"];
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.ollama-cuda pkgs.tailscale];
+    script = ''
+      export OLLAMA_HOST="$(tailscale ip -4):11434"
+      export OLLAMA_MODELS="/home/ollama/models"
+      exec ollama run nemotron-cascade-2
+    '';
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
+      User = "ollama";
+      Environment = "HOME=/home/ollama";
+    };
+  };
 
   # ── Tailscale ───────────────────────────────────────────────────────
   services.tailscale = {
@@ -57,7 +78,7 @@
   # ── User ────────────────────────────────────────────────────────────
   users.users.ollama = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "video" "render"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXCv2fZAFJFiCYTqx/RXuFva2Tcm9fPqyMI6E8jFJvQ hachem@silver"

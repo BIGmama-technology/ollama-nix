@@ -21,25 +21,28 @@
     ollama-cuda
   ];
 
-  # ── Ollama (custom systemd service) ──────────────────────────────
-  # Binds exclusively to the Tailscale interface for private access.
-  systemd.services.ollama = {
-    enable = true;
-    description = "Ollama serving nemotron-cascade-2 on Tailscale interface";
-    after = ["network.target" "tailscaled.service"];
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.ollama-cuda pkgs.tailscale];
-    script = ''
-      export OLLAMA_HOST="$(tailscale ip -4):11434"
-      export OLLAMA_MODELS="/home/ollama/models"
-      exec ollama run nemotron-cascade-2
-    '';
-    serviceConfig = {
-      Type = "simple";
-      Restart = "always";
-      User = "ollama";
-      Environment = "HOME=/home/ollama";
+  # ── Ollama (Docker container with GPU) ───────────────────────────
+  # Managed by NixOS via oci-containers. The firewall restricts
+  # port 11434 to the tailscale0 interface only.
+  virtualisation.oci-containers.backend = "docker";
+  virtualisation.oci-containers.containers.ollama = {
+    image = "ollama/ollama";
+    autoStart = true;
+    cmd = ["ollama" "run" "nemotron-cascade-2"];
+    ports = ["11434:11434"];
+    environment = {
+      OLLAMA_HOST = "0.0.0.0:11434";
     };
+    volumes = [
+      "ollama:/root/.ollama"
+    ];
+    extraOptions = ["--gpus=all"];
+  };
+
+  # ── Docker + NVIDIA ─────────────────────────────────────────────
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
   };
 
   # ── Tailscale ───────────────────────────────────────────────────────
@@ -78,7 +81,7 @@
   # ── User ────────────────────────────────────────────────────────────
   users.users.ollama = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video" "render"];
+    extraGroups = ["wheel" "video" "render" "docker"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXCv2fZAFJFiCYTqx/RXuFva2Tcm9fPqyMI6E8jFJvQ hachem@silver"

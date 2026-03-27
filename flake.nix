@@ -15,6 +15,7 @@
 
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
+      config.allowUnfree = true;
     };
 
     unstableOverlay = final: prev: {
@@ -24,11 +25,12 @@
     commonModules = [
       {
         nixpkgs.overlays = [unstableOverlay];
+        nixpkgs.config.allowUnfree = true; # Required for NVIDIA drivers
       }
     ];
   in {
     nixosConfigurations = {
-      blackbox = nixpkgs.lib.nixosSystem {
+      ollama = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
           inherit inputs;
@@ -37,7 +39,8 @@
         modules =
           commonModules
           ++ [
-            {}
+            ./hardware-configuration.nix
+            ./configuration.nix
           ];
       };
     };

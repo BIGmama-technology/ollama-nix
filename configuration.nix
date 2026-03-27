@@ -42,8 +42,9 @@
   # ── Docker + NVIDIA ─────────────────────────────────────────────
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
   };
+  hardware.graphics.enable32Bit = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   # ── Tailscale ───────────────────────────────────────────────────────
   services.tailscale = {

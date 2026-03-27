@@ -20,24 +20,6 @@
     jq
   ];
 
-  # ── Ollama (Docker container with GPU) ───────────────────────────
-  # Managed by NixOS via oci-containers. The firewall restricts
-  # port 11434 to the tailscale0 interface only.
-  virtualisation.oci-containers.backend = "docker";
-  virtualisation.oci-containers.containers.ollama = {
-    image = "ollama/ollama";
-    autoStart = true;
-    cmd = ["ollama" "run" "nemotron-cascade-2"];
-    ports = ["11434:11434"];
-    environment = {
-      OLLAMA_HOST = "0.0.0.0:11434";
-    };
-    volumes = [
-      "ollama:/root/.ollama"
-    ];
-    extraOptions = ["--gpus=all"];
-  };
-
   # ── Docker + NVIDIA ─────────────────────────────────────────────
   virtualisation.docker = {
     enable = true;

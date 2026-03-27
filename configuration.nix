@@ -18,7 +18,6 @@
     htop
     curl
     jq
-    ollama-cuda
   ];
 
   # ── Ollama (Docker container with GPU) ───────────────────────────

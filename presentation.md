@@ -1,124 +1,178 @@
-Hachem Betrouni
-CTO at BIGmama technology
-Hyko.ai
+---
+author: Hachem Betrouni | BIGmama Technology | Hyko.ai
+date: ""
+paging: "%d / %d"
+---
+
+# Hachem Betrouni
+
+**CTO at BIGmama Technology**
+
+*Hyko.ai*
 
 Building AI agents across different industries
 
 ---
 
-For:
+## Who we build for
 
-Authors: Alexendre Jardin
-Journalists: newsletter, information collection, translation
-Entroprenuers: competetion analysis, menu suggestion
-Politicians: online persona
-
----
-
-- general overview
-- main AI agent component
-- demo: lets build AI agents
-- how to integrate agents in your organization
-- shortcomings of Agents
-- next steps
+* **Authors**: Alexandre Jardin
+* **Journalists**: newsletter, information collection, translation
+* **Entrepreneurs**: competition analysis, menu suggestion
+* **Politicians**: online persona
 
 ---
 
-2017 first paper on LLMs from google
+## Agenda
 
-2022 openai release Chatgpt and it disrupts the market
-     hype builds up
-
-2025 gpt-5 hit a wall of scaling
-     focus switchs to delivering value
-     cheaper chinese models 
-     opensource models catching up
-
-2026 year of AI agents
-     autonomous AI weaponary
-     mass survaliance
-     llms and robots
-     start of AI agent operational value
-     rise of privacy concerns
-     ...
+1. General overview
+2. Main AI agent components
+3. Demo: let's build AI agents
+4. How to integrate agents in your organization
+5. Shortcomings of agents
+6. Next steps
 
 ---
 
-realy what is an AI agent
+## Timeline
 
-- a language model (core engine)
+**2017** - First paper on LLMs from Google
 
-```mermaid
-#TODO insert here a mermaid diagram of llm in a nutshell as a stochastic function that takes text as input
-and based on the weights it learned from a traning data it assignes probablity to the next word
+**2022** - OpenAI releases ChatGPT and it disrupts the market
+  - Hype builds up
+
+**2025** - GPT-5 hits a wall of scaling
+  - Focus switches to delivering value
+  - Cheaper Chinese models
+  - Open-source models catching up
+
+**2026** - Year of AI agents
+  - Autonomous AI weaponry
+  - Mass surveillance
+  - LLMs and robots
+  - Start of AI agent operational value
+  - Rise of privacy concerns
+
+---
+
+## Really, what is an AI agent?
+
+A **language model** (core engine):
+
+```
+┌──────────────┐     ┌─────────────────────────────────┐     ┌───────────────────┐     ┌──────────────┐
+│  Input Text  │────▶│  Language Model                  │────▶│  P(next word)     │────▶│  Output Text │
+│              │     │  (Weights from training data)    │     │  probability      │     │              │
+└──────────────┘     └─────────────────────────────────┘     └───────────────────┘     └──────────────┘
 ```
 
-- access to tools
-- in a loop
+* Access to **tools**
+* In a **loop**
 
---- 
+---
 
-```mermaid
-#TODO agent using tools in a loop, eg tools: web search, database query, browser action ...
+## Agent architecture
+
 ```
----
-lets build few agents with Hyko.ai
-
-- [ ] site security audit
-- [ ] competetion analysis
-
----
-usecases AI agents are good at
-
-- reporting and summarization tasks
-- information search (archive look up)
-- repetitive clicking tasks (browser automation, form fill up)
-
----
-AI agents are not good at
-
-- general problem solving
-- complex orchestration
-- deploying expertise
-- knowing what is correct
-
---- 
-Importance of building your AI agent 
-strategy
-
-- preserve your knowhow
-- scale operations
-- free time for more strategic operations
-- decrease reliability on hr
-
----
-
-importance of security in this age
-
-- countries building mass survailance centers
-- better persona profiling
-- leaking strategic information and expertise
-- larger attack surface on agents with lower penetraion barrier
-- automated cyber attacks with AI agents
+                         ┌─────────────┐
+                         │ User Query  │
+                         └──────┬──────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+               ┌───▶   AI Agent (LLM)      │
+               │    └───────────┬───────────┘
+               │                │
+               │                ▼
+               │       ┌────────────────┐
+               │       │  Select Tool   │
+               │       └───┬───┬───┬────┘
+               │           │   │   │
+               │    ┌──────┘   │   └──────┐
+               │    ▼          ▼          ▼
+               │ ┌────────┐ ┌──────┐ ┌─────────┐
+               │ │  Web   │ │  DB  │ │ Browser │
+               │ │ Search │ │Query │ │ Action  │
+               │ └───┬────┘ └──┬───┘ └────┬────┘
+               │     │         │          │
+               │     └─────┬───┘──────────┘
+               │           ▼
+               │    ┌──────────────┐
+               │    │   Process    │
+               │    │   Results    │
+               │    └──────┬───────┘
+               │           │
+               │           ▼
+               │      ┌─────────┐    Yes   ┌────────────────┐
+               │      │  Done?  │─────────▶│ Final Response │
+               │      └────┬────┘          └────────────────┘
+               │           │ No
+               └───────────┘
+```
 
 ---
 
-Where to start: 
+## Demo
 
-- indentify usecases and procedures
-- start with POC and simple task
-- complixify as you go
-- use tools with low vendor locking
-- scan your archive
-- hire people fimliar with AI and capable of adapting 
-(checkout `super papillion` a boot about transformation in the age of AI)
+Let's build a few agents with **Hyko.ai**
+
+* Site security audit
+* Competition analysis
 
 ---
 
-lets build your AI agent strategy
+## Use cases AI agents are good at
 
-contact: 
-    - hk@big-mama.io
-    - hb@big-mama.io
+* Reporting and summarization tasks
+* Information search (archive lookup)
+* Repetitive clicking tasks (browser automation, form fill-up)
 
+---
 
+## AI agents are not good at
+
+* General problem solving
+* Complex orchestration
+* Deploying expertise
+* Knowing what is correct
+
+---
+
+## Building your AI agent strategy
+
+* Preserve your know-how
+* Scale operations
+* Free time for more strategic operations
+* Decrease reliance on HR
+
+---
+
+## Importance of security in this age
+
+* Countries building mass surveillance centers
+* Better persona profiling
+* Leaking strategic information and expertise
+* Larger attack surface on agents with lower penetration barrier
+* Automated cyber attacks with AI agents
+
+---
+
+## Where to start
+
+* Identify use cases and procedures
+* Start with POC and simple tasks
+* Complexify as you go
+* Use tools with low vendor locking
+* Scan your archive
+* Hire people familiar with AI and capable of adapting
+
+> checkout *Super Papillon* - a book about transformation in the age of AI
+
+---
+
+# Let's build your AI agent strategy
+
+**Contact:**
+
+`hk@big-mama.io` Hadj Khelil CEO
+`hb@big-mama.io` Hachem Betrouni CTO

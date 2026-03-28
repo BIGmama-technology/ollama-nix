@@ -16,10 +16,11 @@ Building AI agents across different industries
 
 ## Who we build for
 
-* **Authors**: Alexandre Jardin
-* **Journalists**: newsletter, information collection, translation
-* **Entrepreneurs**: competition analysis, menu suggestion
-* **Politicians**: online persona
+* **Authors**: Alexandre Jardin -- research assistance, content generation, fact-checking
+* **Journalists**: newsletter automation, information collection, translation, source monitoring
+* **Entrepreneurs**: competition analysis, menu suggestion, market trend tracking
+* **Politicians**: online persona management, sentiment analysis, constituent outreach
+* **Legal professionals**: contract review, case research, regulatory monitoring
 
 ---
 
@@ -36,15 +37,17 @@ Building AI agents across different industries
 
 ## Timeline
 
-**2017** - First paper on LLMs from Google
+**2017** - First paper on LLMs from Google (Attention Is All You Need)
 
 **2022** - OpenAI releases ChatGPT and it disrupts the market
   - Hype builds up
+  - Everyone becomes a prompt engineer
 
 **2025** - GPT-5 hits a wall of scaling
   - Focus switches to delivering value
-  - Cheaper Chinese models
-  - Open-source models catching up
+  - Cheaper Chinese models (DeepSeek)
+  - Open-source models catching up (Llama, Mistral)
+  - MCP protocol standardizes tool integration
 
 **2026** - Year of AI agents
   - Autonomous AI weaponry
@@ -52,6 +55,7 @@ Building AI agents across different industries
   - LLMs and robots
   - Start of AI agent operational value
   - Rise of privacy concerns
+  - Regulation scramble across governments
 
 ---
 
@@ -61,13 +65,16 @@ A **language model** (core engine):
 
 ```
 ┌──────────────┐     ┌─────────────────────────────────┐     ┌───────────────────┐     ┌──────────────┐
-│  Input Text  │────▶│  Language Model                  │────▶│  P(next word)     │────▶│  Output Text │
-│              │     │  (Weights from training data)    │     │  probability      │     │              │
+│  Input Text  │────▶│  Language Model                 │────▶│  P(next word)     │────▶│  Output Text │
+│              │     │  (Weights from training data)   │     │  probability      │     │              │
 └──────────────┘     └─────────────────────────────────┘     └───────────────────┘     └──────────────┘
 ```
 
-* Access to **tools**
-* In a **loop**
+That becomes an **agent** when you add:
+
+* Access to **tools** (search, databases, APIs, browsers, code execution)
+* A **loop** (reason → act → observe → repeat)
+* A **goal** (task to accomplish autonomously)
 
 ---
 
@@ -80,7 +87,7 @@ A **language model** (core engine):
                                 │
                                 ▼
                     ┌───────────────────────┐
-               ┌───▶   AI Agent (LLM)      │
+               ┌───▶│   AI Agent (LLM)      │
                │    └───────────┬───────────┘
                │                │
                │                ▼
@@ -125,7 +132,9 @@ Let's build a few agents with **Hyko.ai**
 
 * Reporting and summarization tasks
 * Information search (archive lookup)
+* Formating and filling forms
 * Repetitive clicking tasks (browser automation, form fill-up)
+* Using text based interfaces (cli, api, code)
 
 ---
 
@@ -135,36 +144,43 @@ Let's build a few agents with **Hyko.ai**
 * Complex orchestration
 * Deploying expertise
 * Knowing what is correct
+* Using graphical based interfaces
 
 ---
 
 ## Building your AI agent strategy
 
-* Preserve your know-how
-* Scale operations
-* Free time for more strategic operations
-* Decrease reliance on HR
+* **Preserve your know-how** -- encode institutional knowledge before it walks out the door
+* **Scale operations** -- handle 10x the volume without 10x the headcount
+* **Free time for strategic work** -- remove repetitive tasks from expert employees
+* **Decrease reliance on human resources** -- no sick leaves, burnouts, and trust issues
+* **Improve consistency** -- same process, same quality, every time
+* **Accelerate onboarding** -- new hires get AI-assisted ramp-up
 
 ---
 
 ## Importance of security in this age
 
 * Countries building mass surveillance centers
-* Better persona profiling
-* Leaking strategic information and expertise
+* Better persona profiling through aggregated data
+* Leaking strategic information and expertise through AI tools
 * Larger attack surface on agents with lower penetration barrier
 * Automated cyber attacks with AI agents
+* Prompt injection and data exfiltration risks
+* Supply chain risks from third-party AI providers
 
 ---
 
 ## Where to start
 
-* Identify use cases and procedures
-* Start with POC and simple tasks
-* Complexify as you go
-* Use tools with low vendor locking
-* Scan your archive
-* Hire people familiar with AI and capable of adapting
+1. **Identify** use cases and procedures worth automating
+2. **Start with POC** and simple, low-risk tasks
+3. **Complexify** as you go -- add tools and workflows incrementally
+4. **Use tools with low vendor locking** -- prefer open standards (MCP, open-source models, .txt formats)
+5. **Scan your archive** -- your existing data is the most valuable asset
+6. **Hire people** familiar with AI and capable of adapting
+7. **Measure ROI** -- track time saved, error reduction, throughput gains
+8. **Adapt tools** -- adapt internal tool to allow for easy AI integration
 
 > checkout *Super Papillon* - a book about transformation in the age of AI
 

@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +14,7 @@
   outputs = {
     nixpkgs,
     nixpkgs-unstable,
+    flake-utils,
     disko,
     ...
   } @ inputs: let
@@ -33,23 +35,31 @@
         nixpkgs.config.allowUnfree = true; # Required for NVIDIA drivers
       }
     ];
-  in {
-    nixosConfigurations = {
-      ollama = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
+  in
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      devShells.default = pkgs.mkShell {
+        packages = [pkgs.nixos-anywhere];
+      };
+    })
+    // {
+      nixosConfigurations = {
+        ollama = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit system;
+          };
+          modules =
+            commonModules
+            ++ [
+              disko.nixosModules.disko
+              ./disk-config.nix
+              ./hardware-configuration.nix
+              ./configuration.nix
+            ];
         };
-        modules =
-          commonModules
-          ++ [
-            disko.nixosModules.disko
-            ./disk-config.nix
-            ./hardware-configuration.nix
-            ./configuration.nix
-          ];
       };
     };
-  };
 }
